@@ -21,24 +21,21 @@ function isItPrime(number){
 function findFriendNumber(number1,number2){
     number1SumDivisors=getSumDivisors(number1);
     number2SumDivisors=getSumDivisors(number2);
-    function getSumDivisors(number){
-        sumDivisors=0
-        for(var i=0;i<number;i++){
-            if(number%i==0)
-                sumDivisors+=i;
-        }
-        return sumDivisors;
-    }
     if(number1SumDivisors==number2 && number2SumDivisors==number1)
         return true;
     return false;
 }
+function getSumDivisors(number){
+    sumDivisors=0
+    for(var i=0;i<number;i++){
+        if(number%i==0)
+            sumDivisors+=i;
+    }
+    return sumDivisors;
+}
 //console.log(findFriendNumber(220,284))
 function findPerfectNumber(number){
-    sumDivisors=0;
-    for(var i=0;i<number;i++)
-        if(number%i==0)
-            sumDivisors+=i
+    sumDivisors=getSumDivisors(number)
     if(sumDivisors==number)
         return true;
     return false;
@@ -61,4 +58,4 @@ function allPrimeNumbersUpTo1000(){
     }
     return primeNumbers;
 }
-console.log(allPrimeNumbersUpTo1000())
+//console.log(allPrimeNumbersUpTo1000())
