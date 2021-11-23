@@ -1,6 +1,8 @@
 import { BaseLogger, ElasticLogger, MongoLogger } from "../crossCuttingConcerns/logging/logger.js"
 import Customer from "../models/customer.js"
 import User from "../models/user.js"
+import CustomerService from "../services/customerService.js"
+import EmployeeService from "../services/employeeService.js"
 import UserService from "../services/userService.js"
 
 console.log("User component yüklendi")
@@ -39,3 +41,5 @@ console.log(userService.employees)
 console.log(userService.errors)
 console.log(userService.getCustomersSorted())
 //22.00 Dersteyiz
+
+console.log("-----------------------------------------------")
