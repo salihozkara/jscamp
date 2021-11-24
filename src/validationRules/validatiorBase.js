@@ -26,6 +26,7 @@ export default class ValidatiorBase {
       when:()=>true
     };
     this.rules.push(this.rule);
+    return this;
   }
   When(when){
     this.rule.when=(object)=>when(object)
