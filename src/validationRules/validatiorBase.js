@@ -39,7 +39,7 @@ export default class ValidatiorBase {
     this.AddRule((field) => field < value);
     return this;
   }
-  IsNan() {
+  IsNumber() {
     this.AddRule((field) => Number.isNaN(Number.parseInt(field)));
     return this;
   }
