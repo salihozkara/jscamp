@@ -4,23 +4,25 @@ export default class UserValidatior extends ValidatiorBase {
   constructor() {
     super();
     super
-      .RuleFor("id")
+      .RuleFor(x=>x.id)
       .HasField()
       .WithMessage("Validation problem. id is required");
     super
-      .RuleFor("firstName")
+      .RuleFor(x=>x.firstName)
       .HasField()
       .WithMessage("Validation problem. firstName is required");
     super
-      .RuleFor("lastName")
+      .RuleFor(x=>x.lastName)
       .HasField()
       .WithMessage("Validation problem. lastName is required");
     super
-      .RuleFor("age")
+      .RuleFor(x=>x.age)
       .HasField()
-      .WithMessage("Validation problem. age is required").IsNumber().WithMessage("age is not number")
+      .WithMessage("Validation problem. age is required")
+      .IsNumber()
+      .WithMessage("age is not number");
     super
-      .RuleFor("city")
+      .RuleFor(x=>x.city)
       .HasField()
       .WithMessage("Validation problem. city is required");
   }

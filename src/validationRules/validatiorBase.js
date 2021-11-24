@@ -6,9 +6,8 @@ export default class ValidatiorBase {
     this.errors = [];
   }
   Validate(object) {
-    this.object = object;
-    for (const rule of this.rules) {
-      if (rule.rule(this.object[rule.field])) {
+    for (const rule of this.rules.filter(r=>r.when(object))) {
+      if (rule.rule(rule.field(object))) {
         this.errors.push(new DataError(rule.message, object));
       }
     }
@@ -16,16 +15,21 @@ export default class ValidatiorBase {
       return { ruleResult: false, errors: this.errors };
     return { ruleResult: true };
   }
-  RuleFor(fieldName) {
-    this.fieldName = fieldName;
+  RuleFor(field) {
+    this.field = field;
     return this;
   }
   AddRule(rule) {
     this.rule = {
-      field: this.fieldName,
+      field: this.field,
       rule: rule,
+      when:()=>true
     };
     this.rules.push(this.rule);
+  }
+  When(when){
+    this.rule.when=(object)=>when(object)
+    return this;
   }
   HasField() {
     this.AddRule((field) => !field);
