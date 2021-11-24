@@ -43,3 +43,7 @@ console.log(userService.getCustomersSorted())
 //22.00 Dersteyiz
 
 console.log("-----------------------------------------------")
+
+let customerService=new CustomerService()
+console.log(customerService.errors)
+console.log(customerService.listCustomers())

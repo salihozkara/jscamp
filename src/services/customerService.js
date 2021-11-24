@@ -1,5 +1,5 @@
 import CustomerValidatior from "../validationRules/customerValidatior.js";
-
+import { users } from "../data/users.js";
 export default class CustomerService {
   constructor() {
     this.customers = [];

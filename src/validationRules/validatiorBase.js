@@ -4,12 +4,11 @@ export default class ValidatiorBase {
   constructor() {
     this.rules = [];
     this.errors = [];
-    this.ruleIndex = -1;
   }
   Validate(object) {
     this.object = object;
     for (const rule of this.rules) {
-      if (rule.rule.call()) {
+      if (rule.rule(this.object[rule.field])) {
         this.errors.push(new DataError(rule.message, object));
       }
     }
@@ -21,23 +20,31 @@ export default class ValidatiorBase {
     this.fieldName = fieldName;
     return this;
   }
+  AddRule(rule) {
+    this.rule = {
+      field: this.fieldName,
+      rule: rule,
+    };
+    this.rules.push(this.rule);
+  }
   HasField() {
-    this.ruleIndex++;
-    this.rules.push({ rule: () => !this.object[this.fieldName] });
+    this.AddRule((field) => !field);
     return this;
   }
   MaxValue(value) {
-    this.ruleIndex++;
-    this.rules.push({ rule: () => this.object[this.fieldName] > value });
+    this.AddRule((field) => field > value);
     return this;
   }
   MinValue(value) {
-    this.ruleIndex++;
-    this.rules.push({ rule: () => this.object[this.fieldName] < value });
+    this.AddRule((field) => field < value);
+    return this;
+  }
+  IsNan() {
+    this.AddRule((field) => Number.isNaN(Number.parseInt(field)));
     return this;
   }
   WithMessage(message) {
-    this.rules[this.ruleIndex].message = message;
+    this.rule.message = message;
     return this;
   }
 }

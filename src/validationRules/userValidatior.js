@@ -18,7 +18,7 @@ export default class UserValidatior extends ValidatiorBase {
     super
       .RuleFor("age")
       .HasField()
-      .WithMessage("Validation problem. age is required");
+      .WithMessage("Validation problem. age is required").IsNan().WithMessage("age is not number")
     super
       .RuleFor("city")
       .HasField()
